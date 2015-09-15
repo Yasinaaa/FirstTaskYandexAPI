@@ -31,13 +31,10 @@ public class ServerBuilder {
     }
 
     public static String getFullYandexURL(Location myLocation, int result){
-        return yandexURL + "/?geocode=" + myLocation.getLongitude() + "," + myLocation.getLatitude() + "&format=json" + "&result=" + result;
+        return yandexURL + "/?geocode=" + myLocation.getLongitude() + "," +
+                myLocation.getLatitude() + "&format=json" + "&result=" + result
+                + "&kind=house";
     }
-    /*
 
-    "kind":"house"
-
-
-     */
 
 }

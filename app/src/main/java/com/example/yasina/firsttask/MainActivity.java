@@ -11,7 +11,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
+import com.example.yasina.firsttask.model.Building;
 import com.example.yasina.firsttask.server.ServerBuilder;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -28,8 +31,15 @@ import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by yasina on 14.09.15.
@@ -49,6 +59,8 @@ public class MainActivity extends FragmentActivity implements
     private boolean mIsInResolution;
     private GoogleMap map;
     private Location userCurrentLocation;
+    private ArrayList<String> mBuildingsListPos;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +109,35 @@ public class MainActivity extends FragmentActivity implements
         @Override
         public void onResponse(Response response) throws IOException {
 
-            Log.d(TAG, response.body().string());
+            String rs = response.body().string();
+            Log.d(TAG, rs);
+
+           // mBuildingsList = objectMapper.readValue(response.body().string(), new TypeReference<ArrayList<Building>>() {
+            //});
+            mBuildingsListPos = new ArrayList<String>();
+
+
+            Pattern p = Pattern.compile("\"pos\": \".{1,}\"");
+            Matcher m = p.matcher(rs);
+
+            // if we find a match, get the group
+            if (m.find())
+            {
+                for(int i=0; i < m.groupCount(); i++) {
+
+                    String pos = m.group(i);
+
+                    mBuildingsListPos.add(pos);
+                }
+
+            }
+
+
+            for(int i=0; i < mBuildingsListPos.size(); i++) {
+                Log.d(TAG, mBuildingsListPos.get(i));
+            }
+
+
         }
     }
 
