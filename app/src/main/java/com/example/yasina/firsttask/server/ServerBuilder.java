@@ -31,7 +31,7 @@ public class ServerBuilder {
     }
 
     public static String getFullYandexURL(Location myLocation, int result){
-        return yandexURL + "/?&geocode=" + myLocation + "&format=json" + "&results=" + result;
+        return yandexURL + "/?geocode=" + myLocation.getLatitude() + "," + myLocation.getLongitude() + "&format=json" + "&results=" + result;
     }
 
 }

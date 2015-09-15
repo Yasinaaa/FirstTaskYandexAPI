@@ -1,11 +1,14 @@
 package com.example.yasina.firsttask;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import com.example.yasina.firsttask.server.ServerBuilder;
@@ -15,6 +18,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -25,10 +34,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by yasina on 14.09.15.
  */
-public class MainActivity extends Activity implements
+public class MainActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,
+        OnMapReadyCallback{
 
     private static final String TAG = "MainActivity";
 
@@ -37,17 +47,33 @@ public class MainActivity extends Activity implements
     private GoogleApiClient mGoogleApiClient;
 
     private boolean mIsInResolution;
+    private GoogleMap map;
+    private Location userCurrentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        map = mapFragment.getMap();
+        map.setMyLocationEnabled(true);
+        map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
     }
+    @Override
+    public void onMapReady(GoogleMap map) {
+
+
+    }
+
 
     @Override
     public void onLocationChanged(Location location){
 
+        userCurrentLocation = location;
         Log.v(TAG, "Latitude: " + location.getLatitude() +
                 ", Longitude: " + location.getLongitude());
 
@@ -56,6 +82,7 @@ public class MainActivity extends Activity implements
     }
     private void getNearestPlaces(Location location){
         String url = ServerBuilder.getFullYandexURL(location, 10);
+        Log.d(TAG,"url=" + url);
         ServerBuilder.get(url, new ComplaintListCallback());
     }
 
