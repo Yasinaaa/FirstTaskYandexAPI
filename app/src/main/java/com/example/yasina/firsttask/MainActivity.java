@@ -82,6 +82,7 @@ public class MainActivity extends FragmentActivity implements
     }
     private void getNearestPlaces(Location location){
         String url = ServerBuilder.getFullYandexURL(location, 10);
+        //String url ="https://geocode-maps.yandex.ru/1.x/?&geocode=37.611,55.758&result=5&format=json";
         Log.d(TAG,"url=" + url);
         ServerBuilder.get(url, new ComplaintListCallback());
     }
