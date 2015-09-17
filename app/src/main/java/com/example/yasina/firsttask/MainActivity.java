@@ -117,7 +117,7 @@ public class MainActivity extends FragmentActivity implements
             mBuildingsListPos = new ArrayList<String>();
 
 
-            Pattern p = Pattern.compile("\"pos\": \".{1,}\"");
+            Pattern p = Pattern.compile("\"pos\": \".*\"");
             Matcher m = p.matcher(rs);
 
             // if we find a match, get the group
