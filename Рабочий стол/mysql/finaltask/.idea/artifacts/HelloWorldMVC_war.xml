@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="HelloWorldMVC:war">
+    <output-path>$PROJECT_DIR$/../last_task/target</output-path>
+    <root id="archive" name="HelloWorldMVC.war">
+      <element id="artifact" artifact-name="HelloWorldMVC:war exploded" />
+    </root>
+  </artifact>
+</component>
