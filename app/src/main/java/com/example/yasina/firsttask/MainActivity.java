@@ -1,45 +1,34 @@
 package com.example.yasina.firsttask;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
-import com.example.yasina.firsttask.model.Building;
+import com.directions.route.Route;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
 import com.example.yasina.firsttask.server.ServerBuilder;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by yasina on 14.09.15.
@@ -47,8 +36,7 @@ import java.util.regex.Pattern;
 public class MainActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener,
-        OnMapReadyCallback{
+        RoutingListener {
 
     private static final String TAG = "MainActivity";
 
@@ -58,9 +46,9 @@ public class MainActivity extends FragmentActivity implements
 
     private boolean mIsInResolution;
     private GoogleMap map;
-    private Location userCurrentLocation;
-    private ArrayList<String> mBuildingsListPos;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private LatLng currentLatLng;
+    private ArrayList<Place> mBuildingsListPos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,38 +56,51 @@ public class MainActivity extends FragmentActivity implements
         setContentView(R.layout.activity_main);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
 
         map = mapFragment.getMap();
         map.setMyLocationEnabled(true);
-        map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-
-    }
-    @Override
-    public void onMapReady(GoogleMap map) {
-
 
     }
 
 
-    @Override
-    public void onLocationChanged(Location location){
-
-        userCurrentLocation = location;
-        Log.v(TAG, "Latitude: " + location.getLatitude() +
-                ", Longitude: " + location.getLongitude());
-
-        getNearestPlaces(location);
-
-    }
-    private void getNearestPlaces(Location location){
+    private void getNearestPlace(Location location){
         String url = ServerBuilder.getFullYandexURL(location, 10);
-        //String url ="https://geocode-maps.yandex.ru/1.x/?&geocode=37.611,55.758&result=5&format=json";
-        Log.d(TAG,"url=" + url);
-        ServerBuilder.get(url, new ComplaintListCallback());
+        ServerBuilder.get(url, new PlacesCallback());
     }
 
-    private class ComplaintListCallback implements Callback {
+    private void changeCamera(){
+        CameraUpdate center=
+                CameraUpdateFactory.newLatLng(currentLatLng);
+        CameraUpdate zoom= CameraUpdateFactory.zoomTo(17);
+
+        map.moveCamera(center);
+        map.animateCamera(zoom);
+    }
+
+    @Override
+    public void onRoutingFailure() {
+
+    }
+
+    @Override
+    public void onRoutingStart() {
+
+    }
+
+    @Override
+    public void onRoutingSuccess(PolylineOptions polylineOptions, Route route) {
+        PolylineOptions polyoptions = new PolylineOptions();
+        polyoptions.addAll(polylineOptions.getPoints());
+        if (map != null) map.addPolyline(polyoptions);
+    }
+
+    @Override
+    public void onRoutingCancelled() {
+
+    }
+
+    private class PlacesCallback implements Callback {
 
         @Override
         public void onFailure(Request request, IOException e) {
@@ -112,32 +113,28 @@ public class MainActivity extends FragmentActivity implements
             String rs = response.body().string();
             Log.d(TAG, rs);
 
-           // mBuildingsList = objectMapper.readValue(response.body().string(), new TypeReference<ArrayList<Building>>() {
-            //});
-            mBuildingsListPos = new ArrayList<String>();
+            mBuildingsListPos = PlaceAPI.getPLaces(rs);
 
-
-            Pattern p = Pattern.compile("\"pos\": \".*\"");
-            Matcher m = p.matcher(rs);
-
-            // if we find a match, get the group
-            if (m.find())
-            {
-                for(int i=0; i < m.groupCount(); i++) {
-
-                    String pos = m.group(i);
-
-                    mBuildingsListPos.add(pos);
+            android.os.Handler handler = new android.os.Handler(getBaseContext().getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    setMarkers();
+                    routeToPlaces();
+                    changeCamera();
                 }
-
-            }
-
-
-            for(int i=0; i < mBuildingsListPos.size(); i++) {
-                Log.d(TAG, mBuildingsListPos.get(i));
-            }
+            });
 
 
+        }
+    }
+
+    private void setMarkers(){
+
+        for (int i = 0; i < mBuildingsListPos.size() ; i++){
+            Place place = mBuildingsListPos.get(i);
+            map.addMarker(new MarkerOptions().position(place.getPlacePos()).
+                    title(place.getName()));
         }
     }
 
@@ -189,18 +186,39 @@ public class MainActivity extends FragmentActivity implements
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
 
-        LocationRequest locationRequest  = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(TimeUnit.SECONDS.toMillis(2));
-        locationRequest.setFastestInterval(TimeUnit.SECONDS.toMillis(2));
-        locationRequest.setSmallestDisplacement(2);
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, this);
-    }
+        Location mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+        if (mCurrentLocation != null) {
+            double currentLatitude = mCurrentLocation.getLatitude();
+            double currentLongitude = mCurrentLocation.getLongitude();
+
+            currentLatLng = new LatLng(currentLatitude, currentLongitude);
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
+
+            map.addMarker(new MarkerOptions()
+                    .position(currentLatLng)
+                    .title("I'm here"));
+
+            getNearestPlace(mCurrentLocation);
+            }
+        }
 
     @Override
     public void onConnectionSuspended(int cause) {
         Log.i(TAG, "GoogleApiClient connection suspended");
         retryConnecting();
+    }
+
+    private void routeToPlaces() {
+        for (int i = 0; i < mBuildingsListPos.size() - 1; i++) {
+            Routing routing = new Routing.Builder()
+                    .travelMode(Routing.TravelMode.WALKING)
+                    .withListener(this)
+                    .waypoints(currentLatLng, mBuildingsListPos.get(i).getPlacePos())
+                    .build();
+            routing.execute();
+
+        }
     }
 
     @Override
