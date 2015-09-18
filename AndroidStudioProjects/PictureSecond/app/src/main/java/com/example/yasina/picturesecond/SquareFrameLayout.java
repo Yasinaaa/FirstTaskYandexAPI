@@ -6,6 +6,9 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+/**
+ * Created by yasina on 18.09.15.
+ */
 
 public class SquareFrameLayout extends FrameLayout {
 

@@ -11,19 +11,16 @@ import android.transition.Transition;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Created by yasina on 18.09.15.
+ */
 
 public class DetailActivity extends Activity {
 
-    // Extra name for the ID parameter
     public static final String EXTRA_PARAM_ID = "detail:_id";
-
-    // View name of the header image. Used for activity scene transitions
     public static final String VIEW_NAME_HEADER_IMAGE = "detail:header:image";
 
-
     private ImageView mHeaderImageView;
-    private TextView mHeaderTitle;
-
     private String mItem;
 
     @Override
@@ -39,8 +36,6 @@ public class DetailActivity extends Activity {
     }
 
     private void loadItem() {
-
-//        mHeaderTitle.setText(getString(R.string.image_header, mItem));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && addTransitionListener()) {
             loadThumbnail();
@@ -74,38 +69,30 @@ public class DetailActivity extends Activity {
             transition.addListener(new Transition.TransitionListener() {
                 @Override
                 public void onTransitionEnd(Transition transition) {
-                    // As the transition has ended, we can now load the full-size image
                     loadFullSizeImage();
-
-                    // Make sure we remove ourselves as a listener
                     transition.removeListener(this);
                 }
 
                 @Override
                 public void onTransitionStart(Transition transition) {
-                    // No-op
                 }
 
                 @Override
                 public void onTransitionCancel(Transition transition) {
-                    // Make sure we remove ourselves as a listener
                     transition.removeListener(this);
                 }
 
                 @Override
                 public void onTransitionPause(Transition transition) {
-                    // No-op
                 }
 
                 @Override
                 public void onTransitionResume(Transition transition) {
-                    // No-op
                 }
             });
             return true;
         }
 
-        // If we reach here then we have not added a listener
         return false;
     }
 

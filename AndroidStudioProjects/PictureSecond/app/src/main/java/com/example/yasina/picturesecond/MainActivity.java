@@ -17,6 +17,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Created by yasina on 18.09.15.
+ */
+
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private GridView mGridView;
