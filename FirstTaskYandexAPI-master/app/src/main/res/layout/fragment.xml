@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <FrameLayout
+            android:id="@+id/container_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+    <AbsoluteLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <LinearLayout
+                android:id="@+id/container_popup"
+                android:orientation="vertical"
+                android:background="@drawable/background_popup"
+                android:visibility="invisible"
+                android:layout_x="0dp"
+                android:layout_y="0dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_name_marker_item"
+                    android:text="Россия, Москва, Тверская улица, 7"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    />
+                <ImageView
+                    android:id="@+id/iv_delete_marker_item"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_clear_black_24dp"/>
+            </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15sp"
+                    android:text="@string/tv_description"/>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    >
+
+                        <EditText
+                            android:id="@+id/et_description_marker_item"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginTop="10dp"
+                            android:textSize="15sp"
+                            android:textColor="#000"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="8dp"
+                            />
+
+                        <ImageView
+                            android:id="@+id/iv_change_description_maker_item"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_create_black_24dp"/>
+
+                </LinearLayout>
+                    />
+
+        </LinearLayout>
+
+    </AbsoluteLayout>
+
+</RelativeLayout>
+

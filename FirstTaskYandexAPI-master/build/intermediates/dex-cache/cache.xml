@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/yasina/FirstTaskYandexAPI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.8.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4a135d56554069e5d0ff80e3220e887e57146ee5">
+        <dex dex="/home/yasina/FirstTaskYandexAPI/app/build/intermediates/pre-dexed/debug/classes-e2ec62ed44853e8369c938c84af1d9ec898c723d.jar" />
+    </item>
+    <item
+        jar="/home/yasina/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/okio-1.6.0-eb973a85badae5eb29cb70fd7f52b51ffc5ad432.jar" />
+    </item>
+    <item
+        jar="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/classes-0bed6f952e211455a54af1e9cbbcc5301475eb47.jar" />
+    </item>
+    <item
+        jar="/home/yasina/FirstTaskYandexAPI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.8.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
+        <dex dex="/home/yasina/FirstTaskYandexAPI/app/build/intermediates/pre-dexed/debug/classes-a09bf70558ee6e85269257deefe424aab34ef1fe.jar" />
+    </item>
+    <item
+        jar="/home/yasina/FirstTaskYandexAPI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.8.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="cb6fab7a71fa9ec1f483d44c5fca65ab469d8aca">
+        <dex dex="/home/yasina/FirstTaskYandexAPI/app/build/intermediates/pre-dexed/debug/classes-db92df927ba538b03cc2140cf01ec4decb31dca8.jar" />
+    </item>
+    <item
+        jar="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.8.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/classes-40b3c2f02ddbaafe5a59a05f89e5cb00b9867181.jar" />
+    </item>
+    <item
+        jar="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-45ff3000b1b91c6c9273251597c029da0c53dee5.jar" />
+    </item>
+    <item
+        jar="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/classes-4288b13411261e0c698032c693f616afd9e2ee13.jar" />
+    </item>
+    <item
+        jar="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.8.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="cb6fab7a71fa9ec1f483d44c5fca65ab469d8aca">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/classes-4222b4f804181c15b86a48ae8b0d84d750a43344.jar" />
+    </item>
+    <item
+        jar="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.4/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4b1a7fac58cc85b115adee653a10b6300f90951a">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/classes-2233943074c8eb3d4a18ef35e9bc2c84b1a4b931.jar" />
+    </item>
+    <item
+        jar="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.8.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4a135d56554069e5d0ff80e3220e887e57146ee5">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/classes-8c86e629fbeffa2712afcf939dbb2fd93643037f.jar" />
+    </item>
+    <item
+        jar="/home/yasina/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-202415cf9e5fbd4a338c64b62f77d5710aac5e92.jar" />
+    </item>
+    <item
+        jar="/home/yasina/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.5.0/4de2b4ed3445c37ec1720a7d214712e845a24636/okhttp-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/okhttp-2.5.0-8369083e00b7511b68a3008e0ff32580b1993060.jar" />
+    </item>
+    <item
+        jar="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/exploded-aar/com.github.jd-alexander/library/1.0.6/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="329547f5f551feb7728e8ab32ffc37c6858fdf37">
+        <dex dex="/home/yasina/Рабочий стол/FirstTaskYandexAPI-master/app/build/intermediates/pre-dexed/debug/classes-8716aceffc3b0bfb14cdce9dce9abd21099099a8.jar" />
+    </item>
+
+</items>

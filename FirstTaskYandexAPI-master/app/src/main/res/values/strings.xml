@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">FirstTask</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_congratulation">Congratulation</string>
+    <string name="title_new_places_added">New places added!</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_repeat">Repeat</string>
+    <string name="title_error">Error</string>
+    <string name="title_current_location">Current Location</string>
+    <string name="description_current_location">It is a beautiful house</string>
+
+    <string name="tv_description">Description</string>
+</resources>
